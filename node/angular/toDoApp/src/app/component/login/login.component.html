@@ -1,0 +1,31 @@
+<label><h2>Iniciar Sesión</h2></label>
+<div class="card">
+  <!-- Esto aparece si todavía no has iniciado sesión -->
+  <div class="card-body" *ngIf="!isLoggedIn">
+    <form (submit)="login($event)">
+      <div class="form-group">
+          <label>Nombre de usuario:</label>
+          <input type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Introduce tu nombre de usuario">
+        </div>
+      <div class="form-group"> 
+          <label>Contraseña:</label>
+          <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Introduce tu contraseña">
+        </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">
+          Iniciar sesión
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Mensaje que aparece si fallas el login -->
+  <div *ngIf="lastTimeFailed">
+    <label class="btn btn-danger">El usuario o la contraseña son incorrectos</label>
+  </div>
+
+  <!-- Esto aparece si ya has iniciado sesión -->
+  <div class="card-body" *ngIf="isLoggedIn">
+    No hay necesidad de iniciar sesión, ya lo has hecho
+  </div>
+</div>

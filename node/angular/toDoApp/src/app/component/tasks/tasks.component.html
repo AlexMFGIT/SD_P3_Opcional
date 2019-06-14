@@ -1,0 +1,48 @@
+<div *ngIf="isLoggedIn">
+  <!-- Formulario para crear tareas -->
+  <div class="card">
+    <div class="card-body">
+      <form (submit)="addTask($event)">
+        <div class="input-group">
+          <input type="text" [(ngModel)]="titulo" name="titulo" class="form-control" placeholder="Añade tu tarea">
+          <span class="input-group-addon">
+            <button type="submit" class="btn btn-primary">
+              Añadir Tarea
+            </button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lista con todas las tareas existentes para marcar y eliminar -->
+  <table class="table text-center table-hover">
+    <thead>
+      <tr>
+        <th>Estado</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>
+          <input type="checkbox"  [checked]="task.isDone" (click)="updateStatus(task)">
+        </td>
+        <td>
+          {{task.title}}
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteTask(task._id)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-body" *ngIf="!isLoggedIn">
+  Parece que no te has identificado! Inicia sesión para acceder a tus tareas
+</div>
+
